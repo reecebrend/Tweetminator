@@ -7,7 +7,7 @@ from sklearn.model_selection import cross_val_score
 from scipy import stats
 
 users = pd.read_csv('users.txt', sep='\t', header=0)
-users_features = list(users.columns[:10])
+users_features = list(users.columns[:9])
 
 #Function block
 
@@ -38,6 +38,8 @@ def crossValScore(array, features, type):
 	"""Determine the cross validation score for a given array of data"""
 	print("Performing cross validation and obtaining scores...")
 	dt = DecisionTreeClassifier(min_samples_split=20, random_state=99)
+
+	del users_features[8] #Discard "type" column as it causes the system to "cheat"
 
 	x = array[features]
 	y = array[type]
