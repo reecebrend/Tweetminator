@@ -1,14 +1,15 @@
 import pandas as pd
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
-from sklearn import preprocessing, tree
+from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from scipy import stats
 from getURLFreq import getURLFreq
-import csv, sys, cgi
+import csv
+import sys
 from twitterHandler import getUserAttributes
-import pydot
+import cgi
 
 #Function block
 
@@ -92,12 +93,7 @@ def predictUser(username):
 
 	print("raw results: ", predict)
 	print("chance of being human: ", predict[0][0])
-
-	tree.export_graphviz(dt, out_file='tree.dot')
-
 	return {'username': username, 'predict': predict[0][0]}
 
-def convToPng():
-	graph = pydot.graph_from_dot_file('tree.dot')
-	graph.write_png('tree.png')
+
 
