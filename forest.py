@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
@@ -42,17 +42,7 @@ def assignType(data, type):
 	if type == 'human':
 		data['type'] = 0
 
-
-
-#def assignURLFreqs(humanFreqs ,botFreqs):
-#	botData['URLfreq'] = 0
-#	humanData['URLfreq'] = 0
-#	for i in xrange(0, len(humanFreqs)):
-#		humanData['URLfreq'][i] = humanFreqs[i]
-#	for i in xrange(0, len(botFreqs)):
-#		botData['URLfreq'][i] = botFreqs[i]
-
-dt = DecisionTreeClassifier(min_samples_split=20, random_state=99)
+dt = RandomForestClassifier(min_samples_split=20, random_state=99)
 
 def predictUser(username):
 
@@ -60,7 +50,7 @@ def predictUser(username):
 	botData = pd.read_csv('content_polluters.txt', sep='\t', header=0)
 	humanData = pd.read_csv('legitimate_users.txt', sep='\t', header=0)
 
-	print("Assigning types to data for Decision Tree Model...\n")
+	print("Assigning types to data for Random Forest Model...\n")
 	assignType(botData, 'bot')
 	assignType(humanData, 'human')
 
